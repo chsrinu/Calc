@@ -111,7 +111,7 @@ function getExpression(expr, currentValue) {
     return Number(expr);
   }*/
   function isSymbol(sym){
-    if(sym =='+'|sym == '-'|sym == '/'|sym=='*'){
+    if(sym =='+'|sym == '-'|sym == '/'|sym=='*'|sym == 'x'){
         return true;
     }
     return false;
