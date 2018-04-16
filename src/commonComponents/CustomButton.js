@@ -12,20 +12,20 @@ class CustomButton extends Component {
     }
   }
 render() {
-  const { label } = this.props;
+  const { label,value } = this.props;
   return (
   <TouchableOpacity
   style={[styles.containerStyle, this.props.symbol? styles.symbolBg:styles.numberBg]}
-  onPress={() => this.numberSeparator(label)}>
+  onPress={() => this.numberSeparator(label, value)}>
   <Text style={[styles.textStyle,this.props.symbol? styles.symbolText:styles.numberText]}>{label}</Text>
   </TouchableOpacity>
 );
 }
-numberSeparator(label) {
+numberSeparator(label, value) {
   if (this.props.symbol | label === '=') {
-    this.props.foundSymbol(label);
+    this.props.foundSymbol(value);
   } else {
-    this.props.foundNumber(label);
+    this.props.foundNumber(value);
   }
 this.props.buttonClicked(label);
 }

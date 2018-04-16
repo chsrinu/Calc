@@ -61,6 +61,7 @@ export default (state = INITIAL_STATE, action) => {
   }
 };
 function getExpression(expr, currentValue) {
+
   //if((expr === '0' && isSymbol(currentValue)) ||(isSymbol(expr[expr.length-1]) && isSymbol(currentValue)))
   console.log('in getExpression',expr, currentValue);
   if(expr === '0') {
@@ -70,7 +71,8 @@ function getExpression(expr, currentValue) {
     }
     else if(currentValue !== '.')//resets the default value to new number
       return currentValue;
-    return expr + '' + currentValue;;
+    //currentValue == '*'?'X':currentValue;
+    return expr + '' + currentValue;s
   }
   if((isSymbol(expr[expr.length-1])) && (isSymbol(currentValue)))
     return expr;//prevents continuous operators{
