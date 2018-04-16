@@ -78,7 +78,7 @@ function getExpression(expr, currentValue) {
   console.log('everything looks good');
   return expr + '' + currentValue;
   }
-function evaluateExpression(expr) {
+/*function evaluateExpression(expr) {
   expr.pop();//remove the =
   //expr.push(finalValue);
   // order = ['/', '*', '+', '-'];
@@ -108,10 +108,41 @@ function evaluateExpression(expr) {
         expr.splice(temp,2);
       }
     return Number(expr);
-  }
+  }*/
   function isSymbol(sym){
     if(sym =='+'|sym == '-'|sym == '/'|sym=='*'){
         return true;
     }
     return false;
+  }
+  function evaluateExpression(expr){
+    var order = ['/', '*', '-', '+'];
+    if(expr.length <= 1)
+      return Number(expr);
+    else{
+      for(var i in order){
+        if(expr.indexOf(order[i])!=-1){
+          console.log('performing',order[i],i);
+          let temp = expr.indexOf(order[i]);
+          console.log(temp,i);
+          switch(order[i]){
+            case '/':
+              expr[temp-1] = expr[temp-1] / expr[temp+1];
+              break;
+            case '*':
+              expr[temp-1] = expr[temp-1] * expr[temp+1];
+              break;
+            case '-':
+              expr[temp-1] = expr[temp-1] - expr[temp+1];
+              break;
+            case '+':
+              expr[temp-1] = expr[temp-1] + expr[temp+1];
+              console.log('adding');
+              break;
+          }
+          expr.splice(temp, 2);
+          evaluateExpression(expr);
+        }
+      }
+    }
   }
