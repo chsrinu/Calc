@@ -71,7 +71,6 @@ function getExpression(expr, currentValue) {
     }
     else if(currentValue !== '.')//resets the default value to new number
       return currentValue;
-    //currentValue == '*'?'X':currentValue;
     return expr + '' + currentValue;s
   }
   if((isSymbol(expr[expr.length-1])) && (isSymbol(currentValue)))
