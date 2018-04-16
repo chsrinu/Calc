@@ -29,6 +29,7 @@ export default (state = INITIAL_STATE, action) => {
        };
 
     case actionCreators.ACTION_EVALUATE:
+      state.savedValues.pop();
       let result = evaluateExpression(state.savedValues);
       return { ...state,
         evaluated: true,
@@ -118,13 +119,13 @@ function getExpression(expr, currentValue) {
   function evaluateExpression(expr){
     var order = ['/', '*', '-', '+'];
     if(expr.length <= 1)
-      return Number(expr);
+      return expr;
     else{
       for(var i in order){
         if(expr.indexOf(order[i])!=-1){
-          console.log('performing',order[i],i);
+          //console.log('performing',order[i],i);
           let temp = expr.indexOf(order[i]);
-          console.log(temp,i);
+          //console.log(temp,i);
           switch(order[i]){
             case '/':
               expr[temp-1] = expr[temp-1] / expr[temp+1];
@@ -137,11 +138,10 @@ function getExpression(expr, currentValue) {
               break;
             case '+':
               expr[temp-1] = expr[temp-1] + expr[temp+1];
-              console.log('adding');
               break;
           }
           expr.splice(temp, 2);
-          evaluateExpression(expr);
+          return evaluateExpression(expr);
         }
       }
     }
